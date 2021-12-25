@@ -74,17 +74,16 @@ public:
         return *this;
     }
 
-    Node<T> *get() { return ptr; }
+    Node<T> *get() { return ptr.get(); }
 
     T &operator*() { return ptr->val; }
 
     const T &operator*() const { return ptr->val; }
 
-    Node<T> operator->() { return ptr.get(); }
+    std::shared_ptr<Node<T>> operator->() { return ptr; }
 
     bool operator==(const list_iterator &oth) { return oth.ptr == ptr; }
 
-    // bool null() { return ptr == nullptr; };
 };
 
 template<class T>

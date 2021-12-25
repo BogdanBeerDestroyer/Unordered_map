@@ -10,48 +10,41 @@
 
 template<class T>
 class iterator : public std::iterator<std::random_access_iterator_tag, T> {
-    std::shared_ptr<Node<T>> ptr = nullptr;
-    std::shared_ptr<list<T>> buck = nullptr;
-    std::shared_ptr<list<T>> map_begin = nullptr;
-    std::shared_ptr<list<T>> map_end = nullptr;
+    Node<T> *ptr = nullptr;
+    list<T> *buck = nullptr;
+    list<T> *map_begin = nullptr;
+    list<T> *map_end = nullptr;
 
 public:
-//    iterator(Node<T> *ptr_m, list<T> *buck_m, list<T> *map_begin_m,
-//             list<T> *map_end_m)
-//            : ptr(ptr_m), buck(buck_m),
-//              map_begin(map_begin_m), map_end(map_end_m) {}
-    iterator(const std::shared_ptr<Node<T>> &ptr_m, const std::shared_ptr<list<T>> &buck_m,
-             const std::shared_ptr<list<T>> &map_begin_m,
-             const std::shared_ptr<list<T>> &map_end_m) : ptr(ptr_m), buck(buck_m), map_begin(map_begin_m),
-                                                          map_end(map_end_m) {}
+    iterator(Node<T> *ptr_m, list<T> *buck_m, list<T> *map_begin_m,
+             list<T> *map_end_m)
+            : ptr(ptr_m), buck(buck_m),
+              map_begin(map_begin_m), map_end(map_end_m) {}
 
-    iterator(const std::shared_ptr<list<T>> &list_ptr, const std::shared_ptr<list<T>> &map_begin_m,
-             const std::shared_ptr<list<T>> &map_end_m) : ptr(list_ptr->begin().get()), buck(list_ptr),
-                                                          map_begin(map_begin_m), map_end(map_begin_m) {}
 
     iterator<T> &operator++() {
-        if (ptr.get() == nullptr) {
+        if (ptr == nullptr) {
             return *this;
         }
-        if (ptr->next || buck.get() == map_end.get() - 1) {
-            ptr = ptr->next;
+        if (ptr->next || buck == map_end - 1) {
+            ptr = ptr->next.get();
         } else {
-            buck.reset(buck.get() + 1);
-            while (buck->empty() && (buck.get() != map_end.get() - 1)) {
-                buck.reset(buck.get() + 1);
+            buck += 1;
+            while (buck->empty() && (buck != map_end - 1)) {
+                buck += 1;
             }
-            ptr = std::shared_ptr<Node<T>>(buck->begin().get());
+            ptr = buck->begin().get();
         }
         return *this;
     }
 
     iterator<T> operator++(int) {
-        if (ptr.get() == nullptr) {
-            return std::make_shared<Node<T>>(nullptr);
+        if (ptr == nullptr) {
+            return *this;
         }
         iterator<T> it1(*this);
         if (ptr->next || buck == map_end - 1) {
-            ptr = ptr->next;
+            ptr = ptr->next.get();
         } else {
             ++buck;
             while (buck->empty() && (buck != map_end - 1)) {
@@ -63,18 +56,18 @@ public:
     }
 
     iterator<T> &operator--() {
-        if (ptr.get() == nullptr) {
-            return std::make_shared<Node<T>>(nullptr);
+        if (ptr == nullptr) {
+            return *this;
         }
         if (ptr->prev != nullptr) {
-            ptr = ptr->prev;
+            ptr = ptr->prev.get();
         } else {
-            if (buck.get() != map_begin) {
+            if (buck != map_begin) {
                 --buck;
-                while (buck->empty() && (buck.get() != map_begin.get())) {
+                while (buck->empty() && (buck != map_begin)) {
                     --buck;
                 }
-                ptr = std::make_shared<Node<T>>((buck->begin() + (buck->size() - 1)).get());
+                ptr = (buck->begin() + (buck->size() - 1)).get();
             }
         }
         return *this;
@@ -82,18 +75,18 @@ public:
 
     iterator<T> operator--(int) {
         iterator<Node<T>> it1(*this);
-        if (ptr.get() == nullptr) {
-            return std::make_shared<Node<T>>(nullptr);
+        if (ptr == nullptr) {
+            return *this;
         }
         if (ptr->prev != nullptr) {
-            ptr = ptr->prev;
+            ptr = ptr->prev.get();
         } else {
-            if (buck.get() != map_begin) {
+            if (buck != map_begin) {
                 --buck;
-                while (buck->empty() && (buck.get() != map_begin.get())) {
+                while (buck->empty() && (buck != map_begin)) {
                     --buck;
                 }
-                ptr = std::make_shared<Node<T>>((buck->begin() + (buck->size() - 1)).get());
+                ptr = (buck->begin() + (buck->size() - 1)).get();
             }
         }
         return *it1;
@@ -113,7 +106,7 @@ public:
         return *this;
     }
 
-    Node<T> *get() const { return ptr.get(); }
+    Node<T> *get() const { return ptr; }
 
     T &operator*() { return ptr->val; }
 
@@ -121,9 +114,9 @@ public:
 
     T *operator->() { return &ptr->val; }
 
-    bool operator==(const iterator &oth) { return oth.ptr.get() == ptr.get(); }
+    bool operator==(const iterator &oth) { return oth.ptr == ptr; }
 
-    list<T> *get_buck() { return buck.get(); }
+    list<T> *get_buck() { return buck; }
 
     template<class Y>
     friend size_t operator-(iterator<Y> it_big, iterator<Y> it_small);
