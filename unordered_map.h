@@ -76,6 +76,11 @@ public:
 
         [[nodiscard]] bool empty() const noexcept { return len == 0; };
 
+        iterator<std::pair<Key, T>> begin(){
+            auto ptr = data;
+
+        }
+
 //    T &at(const Key &key_m) {
 //        size_t buck_num = Hash{}(key_m) % bucket_count;
 //        for (const auto &it: data[buck_num]) {

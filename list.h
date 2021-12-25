@@ -93,12 +93,12 @@ public:
         if (pos.get() == nullptr) {
             return list_iterator<T>(nullptr);
         }
-        if (pos.get() == first) {
+        if (pos.get() == first.get()) {
             first = first->next;
         } else {
             (pos - 1)->next = pos->next;
         }
-        if (pos.get() == last) {
+        if (pos.get() == last.get()) {
             last = last->prev;
         } else {
             (pos + 1)->prev = pos->prev;
