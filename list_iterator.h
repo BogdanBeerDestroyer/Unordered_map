@@ -84,7 +84,6 @@ public:
 
     bool operator==(const list_iterator &oth) { return oth.ptr == ptr; }
 
-    // bool null() { return ptr == nullptr; };
 };
 
 template<class T>

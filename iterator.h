@@ -40,7 +40,6 @@ public:
 
     iterator<T> operator++(int) {
         if (ptr == nullptr) {
-//            return std::make_shared<Node<T>>(nullptr);
             return *this;
         }
         iterator<T> it1(*this);

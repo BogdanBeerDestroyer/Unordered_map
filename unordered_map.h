@@ -35,11 +35,28 @@ public:
         for (size_t i = 0; i < bucket_count; ++i) {
             data[i] = oth.data[i];
         }
+        return *this;
     }
 
-    unordered_map(unordered_map &&) = delete;
+    unordered_map(unordered_map &&oth)  noexcept : len(oth.len), bucket_count(oth.bucket_count), max_load(oth.max_load),
+                                         data(oth.data) {
+        oth.len = 0;
+        oth.bucket_count = 0;
+        oth.max_load = 0;
+        oth.data = nullptr;
+    };
 
-    unordered_map &operator=(unordered_map &&) = delete;
+    unordered_map &operator=(unordered_map &&oth)  noexcept {
+        len = oth.len;
+        bucket_count = oth.bucket_count;
+        max_load = oth.max_load;
+        data = oth.data;
+        oth.len = 0;
+        oth.bucket_count;
+        oth.max_load = 0;
+        oth.data = nullptr;
+        return *this;
+    }
 
     [[nodiscard]] size_t size() const noexcept { return len; };
 
@@ -63,7 +80,7 @@ public:
 
     T &at(const Key &key_m) {
         size_t buck_num = Hash{}(key_m) % bucket_count;
-        for (const auto &it: data[buck_num]) {
+        for (auto &it: data[buck_num]) {
             if (EqualKey{}(std::get<0>(it), key_m)) {
                 return std::get<1>(it);
             }
@@ -100,7 +117,7 @@ public:
                                            data.get() + bucket_count);
     }
 
-    iterator<std::pair<Key, T>> erase(iterator<std::pair<Key, T>>& pos) noexcept {
+    iterator<std::pair<Key, T>> erase(iterator<std::pair<Key, T>> pos) noexcept {
         auto buck = pos.get_buck();
         list_iterator<std::pair<Key, T>> l_it(buck->begin());
         while (l_it.get() != pos.get()) {

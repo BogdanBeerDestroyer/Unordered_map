@@ -47,7 +47,9 @@ public:
         oth.first = nullptr;
         oth.last = nullptr;
         oth.size = 0;
+        return *this;
     }
+
 
     ~list() { clear(); };
 
@@ -87,7 +89,7 @@ public:
 
     [[nodiscard]] bool empty() const { return size == 0; };
 
-    Node<T> *get_last() { return last.get(); };
+//    Node<T> *get_last() { return last.get(); };
 
     list_iterator<T> erase(list_iterator<T> pos) {
         if (pos.get() == nullptr) {
