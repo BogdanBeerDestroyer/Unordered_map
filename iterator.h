@@ -115,7 +115,7 @@ public:
 
     T *operator->() { return &ptr->val; }
 
-    bool operator==(const iterator &oth) { return oth.ptr.get() == ptr; }
+    bool operator==(const iterator &oth) { return oth.ptr == ptr; }
 
     list<T> *get_buck() { return buck; }
 
