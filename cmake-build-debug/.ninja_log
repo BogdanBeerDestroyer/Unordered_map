@@ -1,6 +1,13 @@
 # ninja log v5
-638	706	1640454198480498051	unordered_map_project	5c1d1725448653f8
-0	17	1640455477332192142	build.ninja	d6f23c63433037c5
-0	638	1640454198412498209	CMakeFiles/unordered_map_project.dir/main.cpp.o	93b8030e6c82c319
-1	435	1640455480128181412	CMakeFiles/unordered_map_project.dir/main.cpp.o	93b8030e6c82c319
+1	890	1640456417584302899	CMakeFiles/GoogleTestDemo.dir/tests.cpp.o	c155eaddc090080b
+1	347	1640456475232630201	CMakeFiles/GoogleTestDemo.dir/main.cpp.o	34cda2371908710c
+0	365	1640456468316592895	CMakeFiles/demo.dir/main.cpp.o	7983c1dd4991a5aa
+0	4093	1640455874166431344	for_gtests/googletest/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o	22872cc84f9b9367
+774	779	1640456052181076520	lib/libgtest_maind.a	c5ea77bf99b07e11
 435	492	1640455480184181197	unordered_map_project	5c1d1725448653f8
+0	72	1640456511472817472	build.ninja	d6f23c63433037c5
+1	435	1640455480128181412	CMakeFiles/unordered_map_project.dir/main.cpp.o	93b8030e6c82c319
+1	150	1640456502600772873	GoogleTestDemo	cd073af57991cf11
+365	426	1640456468380593242	demo	f180b3bcee034aa6
+1	774	1640456052177076470	for_gtests/googletest/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o	eae4681977f991f8
+4093	4136	1640455874210432119	lib/libgtestd.a	f12367853959c1a6
