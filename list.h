@@ -89,8 +89,6 @@ public:
 
     [[nodiscard]] bool empty() const { return size == 0; };
 
-//    Node<T> *get_last() { return last.get(); };
-
     list_iterator<T> erase(list_iterator<T> pos) {
         if (pos.get() == nullptr) {
             return list_iterator<T>(nullptr);

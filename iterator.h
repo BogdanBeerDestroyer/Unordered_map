@@ -3,8 +3,6 @@
 #ifndef TEMPLATE_ITERATOR_H
 #define TEMPLATE_ITERATOR_H
 
-#endif  // TEMPLATE_ITERATOR_H
-
 #include <iostream>
 #include "list.h"
 
@@ -152,3 +150,5 @@ template<class T>
 bool operator!=(iterator<T> it1, const iterator<T> &it2) {
     return !(it1 == it2);
 }
+
+#endif  // TEMPLATE_ITERATOR_H
